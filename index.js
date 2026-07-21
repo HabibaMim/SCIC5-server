@@ -267,10 +267,10 @@ app.post("/chat", async (req, res) => {
   }
 
   try {
-   const formattedMessages = [
-  {
-    role: "system",
-    content: `You are the GigsVerse support assistant. Only answer using the facts below — never invent button names, pages, or flows that aren't listed here. If you're unsure, suggest visiting the Help page.
+    const formattedMessages = [
+      {
+        role: "system",
+        content: `You are the GigsVerse support assistant. Only answer using the facts below — never invent button names, pages, or flows that aren't listed here. If you're unsure, suggest visiting the Help page.
 
 GigsVerse facts:
 
@@ -325,25 +325,44 @@ SUPPORT
 - Support hours: Mon-Fri, 9am-6pm
 - More about how GigsVerse works is available on the About page.
 
-Keep answers short and friendly.`,
-  },
-  ...messages.map((m) => ({
-    role: m.role === "assistant" ? "assistant" : "user",
-    content: m.content,
-  })),
-];
+Keep replies short and clear, to the point, not too much unnecessary information.
+
+RESPONSE FORMAT — CRITICAL:
+You must respond with ONLY a valid JSON object, no markdown formatting, no code fences, no extra text before or after. The JSON must have exactly this shape:
+{"reply": "your full answer here", "suggestions": ["short follow-up question 1", "short follow-up question 2", "short follow-up question 3"]}
+
+The "reply" field should be as thorough as the question requires.
+The "suggestions" array must contain exactly 3 short, natural follow-up questions the user might reasonably ask next, based on the current topic. Keep each suggestion under 8 words — brevity only applies to suggestions, never to the reply. If there's genuinely nothing relevant to suggest, return an empty array.`,
+      },
+      ...messages.map((m) => ({
+        role: m.role === "assistant" ? "assistant" : "user",
+        content: m.content,
+      })),
+    ];
 
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
       messages: formattedMessages,
+      response_format: { type: "json_object" },
     });
 
-    const reply = completion.choices[0]?.message?.content ?? "Sorry, I couldn't generate a response.";
+    const rawContent = completion.choices[0]?.message?.content;
 
-    res.json({ reply });
+    let parsed;
+    try {
+      parsed = JSON.parse(rawContent);
+    } catch (parseError) {
+      console.error("Failed to parse AI JSON response:", rawContent);
+      parsed = { reply: rawContent || "Sorry, I couldn't generate a response.", suggestions: [] };
+    }
+
+    const reply = parsed?.reply ?? "Sorry, I couldn't generate a response.";
+    const suggestions = Array.isArray(parsed?.suggestions) ? parsed.suggestions.slice(0, 3) : [];
+
+    res.json({ reply, suggestions });
   } catch (error) {
     console.error("Chat generation failed:", error);
-    res.status(500).json({ reply: "Something went wrong. Please try again." });
+    res.status(500).json({ reply: "Something went wrong. Please try again.", suggestions: [] });
   }
 });
 
