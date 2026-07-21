@@ -277,7 +277,7 @@ GigsVerse facts:
 BROWSING GIGS
 - Go to the Gigs page to browse all available services.
 - Use the search bar to search by gig title.
-- Use the category filter to narrow by category: Graphics & Design, Digital Marketing, Writing & Translation, Video & Animation, Programming & Tech, or Music & Audio.
+- Use the category filter to narrow by category: Graphics & Design, Digital Marketing, Writing & Translation, Video & Animation or Programming & Tech.
 - Use the price filter to set a minimum and/or maximum price range.
 - Use the sort dropdown to sort by Price: Low to High, Price: High to Low, or Most Popular (based on order activity).
 - Results are paginated; use the page buttons at the bottom to browse further.
@@ -305,8 +305,8 @@ LISTING A GIG (SELLING A SERVICE)
 - Fill in: gig title, description, image URL, category, starting price, and delivery time.
 - Submit to publish the gig instantly — no approval process, it goes live right away.
 
-MANAGING YOUR LISTINGS
-- Go to "My Listings" from the profile menu to see gigs you've listed for sale.
+MANAGING YOUR GIGS
+- Go to "My Gigs" from the profile menu to see gigs you've listed for sale.
 - Each listing shows its order count (how many times it's been ordered).
 - Click "View" to see the live gig page, "Update" to edit any field, or the delete option to remove a gig permanently.
 - Editing a gig lets you change any of its details: title, description, image, category, price, or delivery time.
@@ -315,7 +315,7 @@ ACCOUNT & LOGIN
 - Sign up with name, email, a photo URL, and a password (minimum 6 characters, needs at least one uppercase and one lowercase letter).
 - Log in using email/password or "Continue with Google".
 - On the login page, there's a "Demo login credentials" button to instantly try the platform with a sample account.
-- Once logged in, your name and photo appear via the profile menu, which links to "My Listings" and "My Orders".
+- Once logged in, your name and photo appear via the profile menu, which links to "My Gigs" and "My Orders".
 
 SUPPORT
 - Visit the Help page for step-by-step guides on Getting Started, Orders, Listing a Gig, and Account & Security.
