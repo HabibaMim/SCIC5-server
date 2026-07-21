@@ -285,7 +285,7 @@ BROWSING GIGS
 
 VIEWING A GIG
 - Click any gig card to open its full detail page.
-- The detail page shows the seller's name and photo, a full description, category, delivery time, starting price, and how many times it's been ordered.
+- The detail page shows the seller's name, a full description, category, delivery time, starting price, and how many times it's been ordered.
 
 PLACING AN ORDER
 - Open a gig's detail page and click "Order Now".
