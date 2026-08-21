@@ -29,6 +29,9 @@ const reviewCollection = db.collection("reviews");
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
+console.log("Groq key prefix:", JSON.stringify(process.env.GROQ_API_KEY?.slice(0, 10)));
+console.log("Groq key length:", process.env.GROQ_API_KEY?.length);
+
 // ---------- Middleware ----------
 
 const logger = (req, res, next) => {
@@ -345,6 +348,8 @@ The "suggestions" array must contain exactly 3 short, natural follow-up question
       messages: formattedMessages,
       response_format: { type: "json_object" },
     });
+
+    
 
     const rawContent = completion.choices[0]?.message?.content;
 
